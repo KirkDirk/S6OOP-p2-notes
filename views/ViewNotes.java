@@ -2,7 +2,14 @@ package views;
 
 import java.util.Scanner;
 
+import controllers.NoteController;
+
 public class ViewNotes {
+    private NoteController noteController;
+    
+    public ViewNotes(NoteController noteController) {
+        this.noteController = noteController;
+    }
     
     public void run() {
         

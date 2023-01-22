@@ -1,4 +1,9 @@
+import controllers.NoteController;
+import interfaces.NMSingle;
+import interfaces.NotesManagable;
 import interfaces.SAImpl;
+import interfaces.StorageActions;
+import views.ViewNotes;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,7 +11,15 @@ public class Main {
         System.out.println("Привет! Это проект Записки, содержащий работу с записками из консоли");
         /** Считываем и показываем количество записей в проекте. Файл notes.txt хранит общие данные по количеству записей*/
         SAImpl non = new SAImpl("storage\\notes.txt");
-        System.out.println(String.format("На сегодня в базе хранится %d записей", non.getNumberOfNotes()));
-        
+        int numberOfNotes = non.getNumberOfNotes();
+        System.out.println(String.format("На сегодня в базе хранится %d записей", numberOfNotes));
+
+        /** Стартуем проект */
+        String fn = "storage\\note"+numberOfNotes+".txt";
+        StorageActions storageActions = new SAImpl(fn);
+        NotesManagable notesManagable = new NMSingle(storageActions);
+        NoteController noteController = new NoteController(notesManagable);
+        ViewNotes view = new ViewNotes(noteController);
+        view.run();
     }
 }
