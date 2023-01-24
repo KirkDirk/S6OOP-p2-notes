@@ -11,31 +11,48 @@ public class SAImpl implements StorageActions {
 
     /** Путь к файлу, с котороым проводятся действия */
     private String fileName;
+    /** Путь к файлу, который содержит общие данные по записям */
+    private String commonFile = "storage\\notes.txt";    
     /** Количество записей в проекте */
     private int numberOfNotes;
 
     /**
      * Конструктор для реализации действий с файлами
+     * 
      * @param fileName - Путь к файлу, с котороым проводятся действия
      */
     public SAImpl(String fileName) {
         this.fileName = fileName;
-        try (FileWriter writer = new FileWriter(fileName, true)) {
-            writer.flush();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+        // Похоже, следующие строки не нужны
+        // try (FileWriter writer = new FileWriter(fileName, true)) {
+        //     writer.flush();
+        // } catch (IOException ex) {
+        //     System.out.println(ex.getMessage());
+        // }
+    }
+    
+    /** Обновляем значение количества Записей в общем файле хранилища */
+    @Override
+    public void saveCommonData(int id) {
+        try (FileWriter fileOpenToSave = new FileWriter(commonFile, false)){
+            fileOpenToSave.write(id+"::0"); // Здесь 0 - это костыль для замены в будущем
+            fileOpenToSave.flush();
+            fileOpenToSave.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void saveCommonData() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void saveNote() {
-        // TODO Auto-generated method stub
+    public void saveNote(String line) {
+        try (FileWriter wrtr = new FileWriter(fileName, true)) {
+            wrtr.write(line);
+            wrtr.flush();
+            wrtr.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     }
 
@@ -46,7 +63,7 @@ public class SAImpl implements StorageActions {
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
-            String[] numbers = line.split(",");
+            String[] numbers = line.split("::");
             numberOfNotes = Integer.parseInt(numbers[0]);
             fr.close();
             return numberOfNotes;

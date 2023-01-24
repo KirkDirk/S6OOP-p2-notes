@@ -29,6 +29,7 @@ public class NoteWork extends Note {
         this(idNote, titleNote, textNote);
         this.partnerNote = partnerNote;
     }
+
     public String getPartnerNote() {
         return partnerNote;
     }

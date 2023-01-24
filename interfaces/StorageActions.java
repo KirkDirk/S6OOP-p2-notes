@@ -1,11 +1,11 @@
 package interfaces;
 
 public interface StorageActions {
-    void saveCommonData();
-    void saveNote();
+    void saveCommonData(int id);
+    void saveNote(String line);
 
     /**
-     * Возвращает количество записей
+     * Возвращает количество записей всего в проекте
      * @return int
      */
     int getNumberOfNotes();

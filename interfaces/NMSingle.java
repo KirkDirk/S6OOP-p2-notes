@@ -15,10 +15,12 @@ public class NMSingle implements NotesManagable {
         
     }
 
+    /** Преобразование класса Записи (note) в строку (noteToLine) */
     @Override
     public void saveNoteToTxt(Note note) {
-        // TODO Auto-generated method stub
-        
+        String noteToLine = note.getIdNote() + "::" + note.getTitleNote() + "::" + note.getTextNote();
+        storageActions.saveCommonData(note.getIdNote());
+        storageActions.saveNote(noteToLine);
     }
     
 }
