@@ -7,13 +7,15 @@ import views.ViewNotes;
 
 public class Main {
     public static void main(String[] args) {
+        /** Путь к файлу, который содержит общие данные по записям */
+        final String commonFile = "storage\\notes.txt";
         /** Приветственное слово */
         System.out.println("Привет! Это проект Записки, содержащий работу с записками из консоли");
         /**
          * Считываем и показываем количество записей в проекте. Файл notes.txt хранит
          * общие данные по количеству записей
          */
-        SAImpl non = new SAImpl("storage\\notes.txt");
+        SAImpl non = new SAImpl(commonFile);
         int numberOfNotes = non.getNumberOfNotes();
         System.out.println(String.format("На сегодня в базе хранится %d записей", numberOfNotes));
 

@@ -6,6 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+
+import models.Note;
+import models.NoteWork;
 
 public class SAImpl implements StorageActions {
 
@@ -14,7 +18,7 @@ public class SAImpl implements StorageActions {
     /** Путь к файлу, который содержит общие данные по записям */
     private String commonFile = "storage\\notes.txt";    
     /** Количество записей в проекте */
-    private int numberOfNotes;
+    //private int numberOfNotes;
 
     /**
      * Конструктор для реализации действий с файлами
@@ -43,6 +47,7 @@ public class SAImpl implements StorageActions {
         }
     }
 
+    /** Записываем Запись в файл сохранения текущей Записи. Собственно это и есть CREATE note */
     @Override
     public void saveNote(String line) {
         try (FileWriter wrtr = new FileWriter(fileName, true)) {
@@ -53,7 +58,6 @@ public class SAImpl implements StorageActions {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -64,7 +68,7 @@ public class SAImpl implements StorageActions {
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             String[] numbers = line.split("::");
-            numberOfNotes = Integer.parseInt(numbers[0]);
+            int numberOfNotes = Integer.parseInt(numbers[0]);
             fr.close();
             return numberOfNotes;
         } catch (FileNotFoundException e) {
@@ -73,6 +77,22 @@ public class SAImpl implements StorageActions {
             e.printStackTrace();
         }
         return 0;
+    }
+
+
+    
+    @Override
+    public List<NoteWork> readAllFilesFromStorage() {
+        //List<NoteWork> listAllFiles = new List<NoteWork>() {
+            
+     
+        return null;
+    }
+
+    @Override
+    public String readAnyFileFromStorage(String fileName) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

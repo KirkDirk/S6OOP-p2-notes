@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import interfaces.NotesManagable;
 import models.Note;
 
@@ -12,5 +14,10 @@ public class NoteController {
 
     public void saveNote(Note note){
         notesManagable.saveNoteToTxt(note);
+    }
+
+    public List<Note> getAllNotes(){
+        
+        return null;
     }
 }
