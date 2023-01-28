@@ -20,7 +20,7 @@ public class Main {
         System.out.println(String.format("На сегодня в базе хранится %d записей", numberOfNotes));
 
         /**
-         * Стартуем проект. Используем "+1" для имён файлов, когда запись №1
+         * Стартуем проект. Используем "+1" для имён файлов - запись №1
          * соответствует файлу с именем "note1.txt"
          */
         String fn = "storage\\note" + (numberOfNotes + 1) + ".txt";

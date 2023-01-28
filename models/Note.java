@@ -25,6 +25,15 @@ public abstract class Note {
         this.titleNote = titleNote;
         this.textNote = textNote;
     }
+    
+    public Note() {
+        this.idNote = 0;
+        this.titleNote = "";
+        this.textNote="";
+    }
+
+
+
     /**
      * Возвращает ID записи
      * @return - int idNote

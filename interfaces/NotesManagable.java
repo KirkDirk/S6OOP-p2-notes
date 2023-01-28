@@ -3,11 +3,27 @@ package interfaces;
 import java.util.List;
 
 import models.Note;
+import models.NoteWork;
 /**
  * Интерфейс управления записями
  */
 public interface NotesManagable {
-    public void createNote(Note note);
-    public void saveNoteToTxt(Note note);
-    public List<String> getAllNotes(int numberOfNotes);
+    /**
+     * Создание Записи
+     * @param note - Запись(ID::Title::Text)
+     */
+    public void saveNoteToTxt(NoteWork note);
+    
+    /**
+     * Получаем список Записей из хранилища
+     * @param numberOfNotes - количество всех Записей
+     * @return List<Note>
+     */
+    public List<Note> getAllNotes(int numberOfNotes);
+    
+    /**
+     * Добывает количестов Записей из хранилища
+     * @return int
+     */
+    public int getNumberOfNotes();
 }

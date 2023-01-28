@@ -63,7 +63,7 @@ public class SAImpl implements StorageActions {
     @Override
     public int getNumberOfNotes() {
         try {
-            File file = new File(fileName);
+            File file = new File(commonFile);
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
@@ -79,20 +79,38 @@ public class SAImpl implements StorageActions {
         return 0;
     }
 
-
-    
+    /** Считываем Запись из файла с передаваемым именем. Возвращаем Запись в формате NoteWork */
     @Override
-    public List<NoteWork> readAllFilesFromStorage() {
-        //List<NoteWork> listAllFiles = new List<NoteWork>() {
-            
-     
-        return null;
+    public NoteWork readAnyFileFromStorage(String fileName) {
+        try {
+            File file = new File(fileName);
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            String line = reader.readLine();
+            fr.close();
+            return lineToNote(line);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;      
+    }
+
+    /**
+     * Преобразование строки в Запись по формату(ID, Title, Text)
+     * @param line - преобразуемая строка (запись, полученная из файла в виде String)
+     * @return NoteWork
+     */
+    private NoteWork lineToNote(String line){
+        String[] lines = line.split("::");
+        return new NoteWork(Integer.parseInt(lines[0]), lines[1], lines[2]);    
     }
 
     @Override
-    public String readAnyFileFromStorage(String fileName) {
-        // TODO Auto-generated method stub
-        return null;
+    public String noteToString(NoteWork note) {
+        String noteToLine = note.getIdNote() + "::" + note.getTitleNote() + "::" + note.getTextNote();
+        return noteToLine;
     }
 
 }

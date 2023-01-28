@@ -30,6 +30,9 @@ public class NoteWork extends Note {
         this.partnerNote = partnerNote;
     }
 
+    public NoteWork() {
+        super();
+    }
     public String getPartnerNote() {
         return partnerNote;
     }

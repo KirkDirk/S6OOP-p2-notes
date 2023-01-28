@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Note;
+import models.NoteWork;
 
 public class NMSingle implements NotesManagable {
     private StorageActions storageActions;
@@ -11,30 +12,31 @@ public class NMSingle implements NotesManagable {
     public NMSingle(StorageActions storageActions) {
         this.storageActions = storageActions;
     }
-
+    
     @Override
-    public void createNote(Note note) {
-        // TODO Auto-generated method stub
-
+    public int getNumberOfNotes(){
+        return storageActions.getNumberOfNotes();
     }
 
     /** Преобразование класса Записи (note) в строку (noteToLine) */
     @Override
-    public void saveNoteToTxt(Note note) {
-        String noteToLine = note.getIdNote() + "::" + note.getTitleNote() + "::" + note.getTextNote();
+    public void saveNoteToTxt(NoteWork note) {
         storageActions.saveCommonData(note.getIdNote());
-        storageActions.saveNote(noteToLine);
+        String lineNote = storageActions.noteToString(note);
+        storageActions.saveNote(lineNote);
     }
 
+    /** Получение всех Записей из хранилища */
     @Override
-    public List<String> getAllNotes(int numberOfNotes) {
-        List<String> listAllFiles = new ArrayList<String>();
+    public List<Note> getAllNotes(int numberOfNotes) {
+        List<Note> listAllNotes = new ArrayList<>();
         for (int i = 1; i <= numberOfNotes; i++) {
+            /** Формируем имя читаемого файла из хранилища */
             String fileName = "storage\\note" + i + ".txt";
-            String note = storageActions.readAnyFileFromStorage(fileName);
-            listAllFiles.add(note);
+            Note note = storageActions.readAnyFileFromStorage(fileName);
+            listAllNotes.add(note);
         }
-        return null;
+        return listAllNotes;
     }
-
+    
 }
