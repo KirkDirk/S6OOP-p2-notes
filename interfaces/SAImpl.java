@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
-import models.Note;
 import models.NoteWork;
 
 public class SAImpl implements StorageActions {
@@ -111,6 +109,12 @@ public class SAImpl implements StorageActions {
     public String noteToString(NoteWork note) {
         String noteToLine = note.getIdNote() + "::" + note.getTitleNote() + "::" + note.getTextNote();
         return noteToLine;
+    }
+
+    @Override
+    public String createFileName(String id) {
+        String pathToFile = "storage\\note" + id + ".txt";
+        return pathToFile;
     }
 
 }

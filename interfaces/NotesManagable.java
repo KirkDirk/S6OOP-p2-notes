@@ -26,4 +26,10 @@ public interface NotesManagable {
      * @return int
      */
     public int getNumberOfNotes();
+
+    /**
+     * Считываем Запись по ID
+     * @return
+     */
+    public NoteWork readAnyNote(String idFindNote);
 }

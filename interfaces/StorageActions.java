@@ -33,4 +33,12 @@ public interface StorageActions {
      * @return
      */
     String noteToString(NoteWork note); 
+
+    /**
+     * Формирует имя файла для его чтения
+     * @param id - номер ID записи для чтения файла
+     * @return String - путь до читаемого файла
+     */
+    String createFileName(String id);
+
 }

@@ -18,7 +18,6 @@ public class NMSingle implements NotesManagable {
         return storageActions.getNumberOfNotes();
     }
 
-    /** Преобразование класса Записи (note) в строку (noteToLine) */
     @Override
     public void saveNoteToTxt(NoteWork note) {
         storageActions.saveCommonData(note.getIdNote());
@@ -26,17 +25,23 @@ public class NMSingle implements NotesManagable {
         storageActions.saveNote(lineNote);
     }
 
-    /** Получение всех Записей из хранилища */
     @Override
     public List<Note> getAllNotes(int numberOfNotes) {
         List<Note> listAllNotes = new ArrayList<>();
         for (int i = 1; i <= numberOfNotes; i++) {
             /** Формируем имя читаемого файла из хранилища */
-            String fileName = "storage\\note" + i + ".txt";
+            //String fileName = "storage\\note" + i + ".txt";
+            String fileName = storageActions.createFileName(String.valueOf(i));
             Note note = storageActions.readAnyFileFromStorage(fileName);
             listAllNotes.add(note);
         }
         return listAllNotes;
     }
-    
+
+    @Override
+    public NoteWork readAnyNote(String idFindNote) {
+        NoteWork note = storageActions.readAnyFileFromStorage(storageActions.createFileName(idFindNote));
+        return note;
+    }
+
 }

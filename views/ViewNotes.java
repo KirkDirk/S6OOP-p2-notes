@@ -31,7 +31,9 @@ public class ViewNotes {
                         noteController.saveNote(getNoteFromConsole());
                         break;
                     case READ:
-
+                        String idFindNote = prompt("Введите ID: ");
+                        NoteWork printFindedNote = noteController.readAnyNoteWork(idFindNote);
+                        System.out.println(printFindedNote.toString());
                         break;
                     case LIST:
                         System.out.println("Всего записей: " + noteController.getNumberOfNotes());
@@ -68,18 +70,12 @@ public class ViewNotes {
     /**
      * Получение Записи с консоли
      * 
-     * @return Note note
+     * @return NoteWork note
      */
-    private Note getNoteFromConsole() {
-        Note note = new NoteWork(0, null, null);
-        /**
-         * getNON - экземпляр класса SAImpl. Создаётся для получения индекса текущей
-         * записи, следующей за последней записью
-         */
-        SAImpl getNON = new SAImpl("storage\\notes.txt");
-        /** Устанавливаем для текущей записи индекс */
-        note.setIdNote(getNON.getNumberOfNotes() + 1);
-        /** Устанавливаем для текущей записи значения Заголовка и Текста */
+    private NoteWork getNoteFromConsole() {
+        NoteWork note = new NoteWork();
+        /** Устанавливаем для текущей записи значения ID, Заголовка и Текста */
+        note.setIdNote(noteController.getNumberOfNotes()+1);
         note.setTitleNote(prompt("Заголовок: "));
         note.setTextNote(prompt("Текст: "));
         return note;
