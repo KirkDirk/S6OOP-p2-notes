@@ -43,7 +43,7 @@ public class NMSingle implements NotesManagable {
     }
 
     @Override
-    public void updatedNote(NoteWork readN, NoteWork updN) {
+    public void updateNote(NoteWork readN, NoteWork updN) {
         if (updN.getTitleNote() != "") {
             readN.setTitleNote(updN.getTitleNote());
         }
@@ -51,6 +51,14 @@ public class NMSingle implements NotesManagable {
             readN.setTextNote(updN.getTextNote());
         }
         storageActions.saveNote(storageActions.noteToString(readN), storageActions.createFileName(String.valueOf(readN.getIdNote())));
+    }
+
+    @Override
+    public void deleteNote(String id) {
+        NoteWork delNote = this.readAnyNote(id);
+        delNote.setTitleNote("Удалена");
+        delNote.setTextNote("Время и дата удаления: " + java.time.ZonedDateTime.now());
+        storageActions.saveNote(storageActions.noteToString(delNote), storageActions.createFileName(id));
     }
 
     

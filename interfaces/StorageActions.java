@@ -15,6 +15,12 @@ public interface StorageActions {
      */
     void saveNote(String line);
 
+    /**
+     * Переопределяем saveNote для использования в случае 
+     * UPDATE и DELETE
+     * @param line - записываемая Запись в формате строки
+     * @param filename - имя файла за записи Записи
+     */
     void saveNote(String line, String filename);
 
     /**
@@ -43,4 +49,9 @@ public interface StorageActions {
      */
     String createFileName(String id);
 
+    /**
+     * Удаление указанной Записи
+     * @param id - ID удаляемой Записи
+     */
+    void deleteNote(String id);
 }

@@ -118,4 +118,17 @@ public class SAImpl implements StorageActions {
         return pathToFile;
     }
 
+    @Override
+    public void deleteNote(String id) {
+        String line = "Запись № "+ id + " удалена "+ java.time.ZonedDateTime.now();
+        try (FileWriter wrtr = new FileWriter(this.createFileName(id), false)) {
+            wrtr.write(line);
+            wrtr.flush();
+            wrtr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
 }

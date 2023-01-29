@@ -38,5 +38,12 @@ public interface NotesManagable {
      * @param readN - считываемая (старая) Запись
      * @param updN - новая Запись
      */
-    public void updatedNote(NoteWork readN, NoteWork updN);
+    public void updateNote(NoteWork readN, NoteWork updN);
+
+    /**
+     * Удаляем Запись, заданную по ID. Используем saveNote для перезаписи файла 
+     * с удаляемой записью 
+     * @param id - ID удаляемой записи
+     */
+    public void deleteNote(String id);
 }

@@ -63,7 +63,21 @@ public class NoteController {
         return notesManagable.readAnyNote(idNote);
     }
 
+    /**
+     * Перезапись Записи
+     * @param readN - считанная Запись для изменения
+     * @param updN - новые данные для записи в Запись
+     */
     public void updateNote(NoteWork readN, NoteWork updN){
-        notesManagable.updatedNote(readN, updN);
+        notesManagable.updateNote(readN, updN);
+    }
+
+    /**
+     * Удаление Записи, задаваемой по ID. При удалении в Хранилище файл 
+     * перезаписывается с указание даты и времени удаления Записи 
+     * @param id - ID удаляемой записи
+     */
+    public void deleteNote(String id){
+        notesManagable.deleteNote(id);
     }
 }

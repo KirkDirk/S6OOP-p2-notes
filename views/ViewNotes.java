@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import controllers.NoteController;
-import interfaces.SAImpl;
 import models.Note;
 import models.NoteWork;
 
@@ -29,18 +28,22 @@ public class ViewNotes {
                 switch (com) {
                     case CREATE:
                         noteController.saveNote(getNoteFromConsole());
+                        System.out.println("Записано!\n-----------------------");
                         break;
                     case READ:
                         String idFindNote = prompt("Введите ID для чтения: ");
                         NoteWork printFindedNote = noteController.readAnyNoteWork(idFindNote);
+                        System.out.println("-----------------------\nЗапись № " + idFindNote);
                         System.out.println(printFindedNote.toString());
                         break;
                     case LIST:
                         System.out.println("Всего записей: " + noteController.getNumberOfNotes());
+                        System.out.println("-----------------------");
                         List<Note> printedListAllNotes = noteController.getAllNotes();
                         for (Note note : printedListAllNotes) {
-                            System.out.println(note.toString());
+                            System.out.println(note.toString()+"\n---");
                         }
+                        System.out.println("-----------------------");
                         break;
                     case UPDATE:
                         String idUpdateNote = prompt("Введите ID для замены:");
@@ -48,9 +51,12 @@ public class ViewNotes {
                         System.out.println("Введите обновленные данные");
                         NoteWork updatedNote = getNoteFromConsole();
                         noteController.updateNote(readedNote, updatedNote);
+                        System.out.println("Записано!\n-----------------------");
                         break;
                     case DELETE:
-
+                        String idDelNote = prompt("Введите ID для удаления: ");
+                        noteController.deleteNote(idDelNote);
+                        System.out.println("Запись " + idDelNote + " удалена \n-----------------------");
                         break;
                 }
             } catch (Exception e) {
@@ -79,7 +85,7 @@ public class ViewNotes {
     private NoteWork getNoteFromConsole() {
         NoteWork note = new NoteWork();
         /** Устанавливаем для текущей записи значения ID, Заголовка и Текста */
-        note.setIdNote(noteController.getNumberOfNotes()+1);
+        note.setIdNote(noteController.getNumberOfNotes() + 1);
         note.setTitleNote(prompt("Заголовок: "));
         note.setTextNote(prompt("Текст: "));
         return note;
