@@ -54,30 +54,33 @@ public class NoteController {
 
     /**
      * Возвращаем Запись, искомую по ID
+     * 
      * @param idNote - ID искомой Записи
      * @return NoteWork
      * @throws Exception
      */
-    public NoteWork readAnyNoteWork(String idNote) throws Exception{
+    public NoteWork readAnyNoteWork(String idNote) throws Exception {
         validationID(idNote);
         return notesManagable.readAnyNote(idNote);
     }
 
     /**
      * Перезапись Записи
+     * 
      * @param readN - считанная Запись для изменения
-     * @param updN - новые данные для записи в Запись
+     * @param updN  - новые данные для записи в Запись
      */
-    public void updateNote(NoteWork readN, NoteWork updN){
+    public void updateNote(NoteWork readN, NoteWork updN) {
         notesManagable.updateNote(readN, updN);
     }
 
     /**
-     * Удаление Записи, задаваемой по ID. При удалении в Хранилище файл 
-     * перезаписывается с указание даты и времени удаления Записи 
+     * Удаление Записи, задаваемой по ID. При удалении в Хранилище файл
+     * перезаписывается с указание даты и времени удаления Записи
+     * 
      * @param id - ID удаляемой записи
      */
-    public void deleteNote(String id){
+    public void deleteNote(String id) {
         notesManagable.deleteNote(id);
     }
 }

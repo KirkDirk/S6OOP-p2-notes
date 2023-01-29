@@ -14,8 +14,8 @@ public class SAImpl implements StorageActions {
     /** Путь к файлу, с котороым проводятся действия */
     private String fileName;
     /** Путь к файлу, который содержит общие данные по записям */
-    private String commonFile = "storage\\notes.txt";    
-   
+    private String commonFile = "storage\\notes.txt";
+
     /**
      * Конструктор для реализации действий с файлами
      * 
@@ -29,12 +29,11 @@ public class SAImpl implements StorageActions {
             System.out.println(ex.getMessage());
         }
     }
-    
-    /** Обновляем значение количества Записей в общем файле хранилища */
+
     @Override
     public void saveCommonData(int id) {
-        try (FileWriter fileOpenToSave = new FileWriter(commonFile, false)){
-            fileOpenToSave.write(id+"::0"); // Здесь 0 - это костыль для замены в будущем
+        try (FileWriter fileOpenToSave = new FileWriter(commonFile, false)) {
+            fileOpenToSave.write(id + "::" + java.time.ZonedDateTime.now());
             fileOpenToSave.flush();
             fileOpenToSave.close();
         } catch (IOException e) {
@@ -42,7 +41,10 @@ public class SAImpl implements StorageActions {
         }
     }
 
-    /** Записываем Запись в файл сохранения текущей Записи. Собственно это и есть CREATE note */
+    /**
+     * Записываем Запись в файл сохранения текущей Записи. 
+     * Собственно это и есть CREATE note
+     */
     @Override
     public void saveNote(String line) {
         try (FileWriter wrtr = new FileWriter(fileName, false)) {
@@ -54,7 +56,7 @@ public class SAImpl implements StorageActions {
         }
     }
 
-    public void saveNote(String line, String flNm){
+    public void saveNote(String line, String flNm) {
         this.fileName = flNm;
         this.saveNote(line);
     }
@@ -78,7 +80,10 @@ public class SAImpl implements StorageActions {
         return 0;
     }
 
-    /** Считываем Запись из файла с передаваемым именем. Возвращаем Запись в формате NoteWork */
+    /**
+     * Считываем Запись из файла с передаваемым именем. Возвращаем Запись в формате
+     * NoteWork
+     */
     @Override
     public NoteWork readAnyFileFromStorage(String fileName) {
         try {
@@ -93,22 +98,27 @@ public class SAImpl implements StorageActions {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;      
+        return null;
     }
 
     /**
      * Преобразование строки в Запись по формату(ID, Title, Text)
-     * @param line - преобразуемая строка (запись, полученная из файла в виде String)
+     * 
+     * @param line - преобразуемая строка (запись, полученная из файла в виде
+     *             String)
      * @return NoteWork
      */
-    private NoteWork lineToNote(String line){
+    private NoteWork lineToNote(String line) {
         String[] lines = line.split("::");
-        return new NoteWork(Integer.parseInt(lines[0]), lines[1], lines[2]);    
+        return new NoteWork(Integer.parseInt(lines[0]), lines[1], lines[2], lines[3]);
     }
 
     @Override
     public String noteToString(NoteWork note) {
-        String noteToLine = note.getIdNote() + "::" + note.getTitleNote() + "::" + note.getTextNote();
+        String noteToLine = note.getIdNote() + "::"
+                + note.getTitleNote() + "::"
+                + note.getTextNote() + "::"
+                + java.time.ZonedDateTime.now();
         return noteToLine;
     }
 
@@ -120,7 +130,7 @@ public class SAImpl implements StorageActions {
 
     @Override
     public void deleteNote(String id) {
-        String line = "Запись № "+ id + " удалена "+ java.time.ZonedDateTime.now();
+        String line = "Запись № " + id + " удалена " + java.time.ZonedDateTime.now();
         try (FileWriter wrtr = new FileWriter(this.createFileName(id), false)) {
             wrtr.write(line);
             wrtr.flush();
@@ -128,7 +138,7 @@ public class SAImpl implements StorageActions {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 
 }

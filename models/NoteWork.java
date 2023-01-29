@@ -4,44 +4,43 @@ package models;
  */
 public class NoteWork extends Note {
     /**
-     * Поле Записки типа Рабочая - контрагент. 
-     * Начальное значение "none"
+     * Поле Записки типа Дата-Время 
      */
-    private String partnerNote = "none";
+    private String dateTime = "none";
 
     /**
      * Конструктор класса Записка типа Рабочая c 3 полями
-     * @param idNote
-     * @param titleNote
-     * @param textNote
+     * @param idNote - ID Записки
+     * @param titleNote - Заголовок Записки
+     * @param textNote - Текст Записки
      */
     public NoteWork(int idNote, String titleNote, String textNote) {
         super(idNote, titleNote, textNote);        
     }
     /**
-     * Конструктор класса Записка типа Рабочая c 4 полями
+     * Конструктор класса Записка c 4 полями
      * @param idNote
      * @param titleNote
      * @param textNote
-     * @param partnerNote
+     * @param dateTime
      */
-    public NoteWork(int idNote, String titleNote, String textNote, String partnerNote) {
+    public NoteWork(int idNote, String titleNote, String textNote, String dateTime) {
         this(idNote, titleNote, textNote);
-        this.partnerNote = partnerNote;
+        this.dateTime = dateTime;
     }
 
     public NoteWork() {
         super();
     }
-    public String getPartnerNote() {
-        return partnerNote;
-    }
-    public void setPartnerNote(String partnerNote) {
-        this.partnerNote = partnerNote;
+    // public String getPartnerNote() {
+    //     return partnerNote;
+    //}
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
     @Override
     public String toString() {
-        return String.format("Идентификатор: %s\nЗаголовок: %s\nТекст: %s\nКонтрагент: %s", idNote, titleNote, textNote, partnerNote);
+        return String.format("Идентификатор: %s\nЗаголовок: %s\nТекст: %s\nДата-Время: %s", idNote, titleNote, textNote, dateTime);
     }
  
 
