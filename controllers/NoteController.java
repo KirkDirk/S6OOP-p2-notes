@@ -34,7 +34,7 @@ public class NoteController {
     /**
      * Получаем список всех Записей в Storage.
      * 
-     * @return List<String>
+     * @return List<Note>
      */
     public List<Note> getAllNotes() {
         return notesManagable.getAllNotes(getNumberOfNotes());

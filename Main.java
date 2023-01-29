@@ -15,8 +15,7 @@ public class Main {
          * Считываем и показываем количество записей в проекте. Файл notes.txt хранит
          * общие данные по количеству записей
          */
-        SAImpl non = new SAImpl(commonFile);
-        int numberOfNotes = non.getNumberOfNotes();
+        int numberOfNotes = new SAImpl(commonFile).getNumberOfNotes();
         System.out.println(String.format("На сегодня в базе хранится %d записей", numberOfNotes));
 
         /**
