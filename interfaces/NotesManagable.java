@@ -32,4 +32,11 @@ public interface NotesManagable {
      * @return
      */
     public NoteWork readAnyNote(String idFindNote);
+
+    /**
+     * Обновляем данные для Записи
+     * @param readN - считываемая (старая) Запись
+     * @param updN - новая Запись
+     */
+    public void updatedNote(NoteWork readN, NoteWork updN);
 }

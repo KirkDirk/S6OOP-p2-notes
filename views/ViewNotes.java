@@ -31,7 +31,7 @@ public class ViewNotes {
                         noteController.saveNote(getNoteFromConsole());
                         break;
                     case READ:
-                        String idFindNote = prompt("Введите ID: ");
+                        String idFindNote = prompt("Введите ID для чтения: ");
                         NoteWork printFindedNote = noteController.readAnyNoteWork(idFindNote);
                         System.out.println(printFindedNote.toString());
                         break;
@@ -43,7 +43,11 @@ public class ViewNotes {
                         }
                         break;
                     case UPDATE:
-
+                        String idUpdateNote = prompt("Введите ID для замены:");
+                        NoteWork readedNote = noteController.readAnyNoteWork(idUpdateNote);
+                        System.out.println("Введите обновленные данные");
+                        NoteWork updatedNote = getNoteFromConsole();
+                        noteController.updateNote(readedNote, updatedNote);
                         break;
                     case DELETE:
 

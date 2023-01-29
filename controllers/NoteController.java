@@ -56,8 +56,14 @@ public class NoteController {
      * Возвращаем Запись, искомую по ID
      * @param idNote - ID искомой Записи
      * @return NoteWork
+     * @throws Exception
      */
-    public NoteWork readAnyNoteWork(String idNote){
+    public NoteWork readAnyNoteWork(String idNote) throws Exception{
+        validationID(idNote);
         return notesManagable.readAnyNote(idNote);
+    }
+
+    public void updateNote(NoteWork readN, NoteWork updN){
+        notesManagable.updatedNote(readN, updN);
     }
 }

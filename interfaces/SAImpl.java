@@ -15,9 +15,7 @@ public class SAImpl implements StorageActions {
     private String fileName;
     /** Путь к файлу, который содержит общие данные по записям */
     private String commonFile = "storage\\notes.txt";    
-    /** Количество записей в проекте */
-    //private int numberOfNotes;
-
+   
     /**
      * Конструктор для реализации действий с файлами
      * 
@@ -25,12 +23,11 @@ public class SAImpl implements StorageActions {
      */
     public SAImpl(String fileName) {
         this.fileName = fileName;
-        // Похоже, следующие строки не нужны
-        // try (FileWriter writer = new FileWriter(fileName, true)) {
-        //     writer.flush();
-        // } catch (IOException ex) {
-        //     System.out.println(ex.getMessage());
-        // }
+        try (FileWriter writer = new FileWriter(fileName, true)) {
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     /** Обновляем значение количества Записей в общем файле хранилища */
@@ -48,14 +45,18 @@ public class SAImpl implements StorageActions {
     /** Записываем Запись в файл сохранения текущей Записи. Собственно это и есть CREATE note */
     @Override
     public void saveNote(String line) {
-        try (FileWriter wrtr = new FileWriter(fileName, true)) {
+        try (FileWriter wrtr = new FileWriter(fileName, false)) {
             wrtr.write(line);
             wrtr.flush();
             wrtr.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public void saveNote(String line, String flNm){
+        this.fileName = flNm;
+        this.saveNote(line);
     }
 
     @Override

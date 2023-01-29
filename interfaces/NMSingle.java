@@ -12,9 +12,9 @@ public class NMSingle implements NotesManagable {
     public NMSingle(StorageActions storageActions) {
         this.storageActions = storageActions;
     }
-    
+
     @Override
-    public int getNumberOfNotes(){
+    public int getNumberOfNotes() {
         return storageActions.getNumberOfNotes();
     }
 
@@ -29,8 +29,6 @@ public class NMSingle implements NotesManagable {
     public List<Note> getAllNotes(int numberOfNotes) {
         List<Note> listAllNotes = new ArrayList<>();
         for (int i = 1; i <= numberOfNotes; i++) {
-            /** Формируем имя читаемого файла из хранилища */
-            //String fileName = "storage\\note" + i + ".txt";
             String fileName = storageActions.createFileName(String.valueOf(i));
             Note note = storageActions.readAnyFileFromStorage(fileName);
             listAllNotes.add(note);
@@ -43,5 +41,18 @@ public class NMSingle implements NotesManagable {
         NoteWork note = storageActions.readAnyFileFromStorage(storageActions.createFileName(idFindNote));
         return note;
     }
+
+    @Override
+    public void updatedNote(NoteWork readN, NoteWork updN) {
+        if (updN.getTitleNote() != "") {
+            readN.setTitleNote(updN.getTitleNote());
+        }
+        if (updN.getTextNote() != "") {
+            readN.setTextNote(updN.getTextNote());
+        }
+        storageActions.saveNote(storageActions.noteToString(readN), storageActions.createFileName(String.valueOf(readN.getIdNote())));
+    }
+
+    
 
 }

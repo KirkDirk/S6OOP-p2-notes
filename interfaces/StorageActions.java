@@ -15,6 +15,8 @@ public interface StorageActions {
      */
     void saveNote(String line);
 
+    void saveNote(String line, String filename);
+
     /**
      * Возвращает количество записей всего в проекте
      * @return int
